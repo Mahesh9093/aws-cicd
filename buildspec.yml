@@ -1,0 +1,30 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Installing required packages"
+      - apt-get update -y
+      - apt-get install -y nodejs npm
+
+  pre_build:
+    commands:
+      - echo "Installing application dependencies..."
+      - npm install
+
+  build:
+    commands:
+      - echo "Building application..."
+      - npm run build || echo "No build step needed"
+
+  post_build:
+    commands:
+      - echo "Zipping deployment package..."
+      - mkdir -p deployment
+      - cp -r * deployment/
+      - cd deployment
+      - zip -r app.zip .
+
+artifacts:
+  files:
+    - deployment/app.zip

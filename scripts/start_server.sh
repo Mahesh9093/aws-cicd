@@ -1,4 +1,7 @@
 #!/bin/bash
-cd /var/www/app
-echo "Starting application..."
-nohup npm start > app.log 2>&1 &
+echo "Starting Apache web server..."
+apt-get update -y
+apt-get install -y apache2
+
+systemctl start apache2
+systemctl enable apache2

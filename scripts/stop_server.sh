@@ -1,3 +1,4 @@
 #!/bin/bash
-echo "Stopping existing application..."
-pkill node || true
+echo "Stopping existing server (if any)..."
+systemctl stop httpd || true
+systemctl stop nginx || true
